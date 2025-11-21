@@ -1,36 +1,60 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Dashboard | Appzia - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('web/assets/images/favicon.ico') }}">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <!-- jquery.vectormap css -->
+    <link href="{{ asset('web/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"
+        rel="stylesheet">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <!-- morris.js -->
+    <link rel="stylesheet" href="{{ asset('web/assets/libs/morris.js/morris.css') }}">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
+    <!-- DataTables -->
+    <link href="{{ asset('web/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('web/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('web/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet">
+
+    <!-- Icons Css -->
+    <link href="{{ asset('web/assets/css/icons.min.css') }}" rel="stylesheet">
+
+    <!-- App Css -->
+    <link href="{{ asset('web/assets/css/app.min.css') }}" id="app-style" rel="stylesheet">
+
+    <style>
+        hr {
+            color: grey;
+        }
+    </style>
+</head>
+
+<body data-sidebar="dark">
+    <div id="layout-wrapper">
+        @include('layouts.include.header')
+        @include('layouts.include.leftSideBar')
+        <div class="main-content">
+            <main class="site-main" data-bs-spy="scroll" data-bs-target="#siteMenu" data-bs-root-margin="0px"
+                data-bs-smooth-scroll="true" tabindex="0">
+                @yield('content')
+                @include('layouts.include.footer')
             </main>
         </div>
-    </body>
+        @include('layouts.include.rightSideBar')
+        @include('layouts.include.scripts')
+    </div>
+</body>
+
 </html>

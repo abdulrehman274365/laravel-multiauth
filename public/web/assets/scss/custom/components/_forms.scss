@@ -1,0 +1,38 @@
+//
+// Forms.scss
+//
+
+// checkbox input right
+
+.form-check-right {
+  padding-left: 0;
+  display: inline-block;
+  padding-right: $form-check-padding-start;
+  .form-check-input {
+    float: right;
+    margin-left: 0;
+    margin-right: $form-check-padding-start * -1;
+  }
+  .form-check-label {
+    display: block;
+  }
+}
+.form-control {
+  background-color: var(--#{$prefix}input-bg);
+}
+.form-select {
+  background-color: var(--#{$prefix}input-bg);
+}
+.form-check {
+  position: relative;
+  text-align: left /*rtl: right*/;
+}
+
+.form-check-input {
+  background-color: var(--#{$prefix}tertiary-bg);
+  border: 1px solid $gray-500;
+}
+.form-check-label {
+  cursor: pointer;
+  margin-bottom: 0;
+}
