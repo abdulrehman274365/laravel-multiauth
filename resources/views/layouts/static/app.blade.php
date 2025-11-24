@@ -37,18 +37,15 @@
 
 </head>
 
-<body data-sidebar="dark" class="sidebar-enable vertical-collpsed">
-    <div id="layout-wrapper">
-        @include('layouts.static.header')
-        <div class="main-content">
-            <main class="site-main" data-bs-spy="scroll" data-bs-target="#siteMenu" data-bs-root-margin="0px"
-                data-bs-smooth-scroll="true" tabindex="0">
-                @yield('content')
-                @include('layouts.static.footer')
-            </main>
-        </div>
-        @include('layouts.include.scripts')
-    </div>
+<body>
+    @include('layouts.static.header')
+    <main class="site-main" data-bs-spy="scroll" data-bs-target="#siteMenu" data-bs-root-margin="0px"
+        data-bs-smooth-scroll="true" tabindex="0">
+        @yield('content')
+        @include('layouts.static.footer')
+    </main>
+    @include('layouts.include.scripts')
+
 </body>
 
 </html>
