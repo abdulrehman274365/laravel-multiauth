@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('web/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet">
+
+    <!-- Icons Css -->
+    <link href="{{ asset('web/assets/css/icons.min.css') }}" rel="stylesheet">
+
+    <!-- App Css -->
+    <link href="{{ asset('web/assets/css/app.min.css') }}" id="app-style" rel="stylesheet">
 </head>
+<style>
+    .bg-img {
+        background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .overlay-blur {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(5px);
+        z-index: 2;
+    }
+
+    .text-center {
+        z-index: 3;
+    }
+</style>
 
 <body class="bg-light">
 
@@ -51,8 +80,8 @@
                         <!-- Email -->
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control"
-                                   value="{{ old('email') }}" required autofocus>
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required
+                                autofocus>
                         </div>
 
                         <!-- Password -->
@@ -91,11 +120,40 @@
 
                 </div>
             </div>
+            <!-- RIGHT SIDE WITH BACKGROUND IMAGE + TEXT -->
+            <div class="col-md-8 position-relative d-flex justify-content-center align-items-center p-0">
 
-            <!-- EMPTY RIGHT SIDE -->
-            <div class="col-md-8 bg-light">
-                <!-- Optional image or content -->
+                <!-- Background Image -->
+                <div class="bg-img"></div>
+
+                <!-- Overlay Blur -->
+                <div class="overlay-blur"></div>
+
+                <!-- Banner Text -->
+                <div class="text-center text-white position-absolute px-5">
+
+                    <h1 class="fw-bold display-4 mb-3 text-white">Welcome Back!</h1>
+
+                    <p class="fs-5 mb-2">
+                        Streamline your daily workflow with ease and confidence.
+                    </p>
+                    <p class="fs-6 mb-4">
+                        Access your workspaces, manage items, handle bookings, and stay connected — all in one smart
+                        dashboard.
+                    </p>
+
+                    <!-- Social Icons -->
+                    <div class="mt-4">
+                        <a href="#" class="text-white fs-4 me-3"><i class="ri-facebook-circle-fill"></i></a>
+                        <a href="#" class="text-white fs-4 me-3"><i class="ri-instagram-fill"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="ri-linkedin-box-fill"></i></a>
+                    </div>
+
+                </div>
+
+
             </div>
+
 
         </div>
     </div>
@@ -103,4 +161,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

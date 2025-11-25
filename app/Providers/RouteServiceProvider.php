@@ -18,6 +18,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    public const WORKSPACES = '/workspaces';
+    public const PLANS = '/plans';
     public const ADMIN_HOME = '/admin/dashboard';
 
     /**

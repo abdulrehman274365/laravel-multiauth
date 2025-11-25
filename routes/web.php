@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\WorkspaceController;
 
 
 
@@ -30,16 +31,30 @@ Route::get('/', function () {
 Route::controller(SubscriptionController::class)->group(function () {
     Route::get('/plans', 'index')->name('plans.index');
 });
+
 Route::middleware(['auth'])->group(function () {
-    
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('dashbaord');
+    Route::middleware(['PurchasePlan'])->group(function () {
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/lock', 'LockScreen')->name('user.lock');
+            Route::post('/un-lock', 'unLockScreen')->name('user.unlock');
+        });
+
+        Route::middleware(['isLocked'])->group(function () {
+
+            Route::controller(WorkspaceController::class)->group(function () {
+                Route::get('/workspaces', 'index')->name('workspaces.index');
+            });
+            Route::controller(UserController::class)->group(function () {
+                Route::get('/dashboard', 'index')->name('dashboard');
+            });
+            Route::controller(ItemController::class)->group(function () {
+                Route::get('/items', 'index')->name('items.index');
+            });
+
+        });
     });
-    
-    Route::controller(ItemController::class)->group(function () {
-        Route::get('/items', 'index')->name('items.index');
-    });
-    
+
 });
 
 

@@ -75,7 +75,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="bg-white rounded shadow-sm p-4">
+                <div class="rounded shadow-sm p-4">
                     <div class="border-bottom mb-2">
                         <small class="text-muted fw-bold text-uppercase ">Select Option</small>
                     </div>
@@ -83,25 +83,25 @@
                     <ul class="list-unstyled m-0">
 
                         <li class="py-2 menu-item">
-                            <a href="#" class="text-dark text-decoration-none d-flex align-items-center">
+                            <a href="#" class="text-decoration-none d-flex align-items-center">
                                 <i class="ri-add-line me-2 fs-5"></i> New Item
                             </a>
                         </li>
 
                         <li class="py-2  menu-item">
-                            <a href="#" class="text-dark text-decoration-none d-flex align-items-center">
+                            <a href="#" class=" text-decoration-none d-flex align-items-center">
                                 <i class="ri-file-list-line me-2 fs-5"></i> Items List
                             </a>
                         </li>
 
                         <li class="py-2  menu-item">
-                            <a href="#" class="text-dark text-decoration-none d-flex align-items-center">
+                            <a href="#" class=" text-decoration-none d-flex align-items-center">
                                 <i class="ri-folder-add-line me-2 fs-5"></i> New Category
                             </a>
                         </li>
 
                         <li class="py-2  menu-item">
-                            <a href="#" class="text-dark text-decoration-none d-flex align-items-center">
+                            <a href="#" class=" text-decoration-none d-flex align-items-center">
                                 <i class="ri-folders-line me-2 fs-5"></i> Categories List
                             </a>
                         </li>
@@ -112,14 +112,17 @@
         </div>
 
         <style>
+            .menu-item {
+                transition: 0.25s ease;
+            }
             .menu-item:hover {
-                background: #f8f9fa;
                 border-radius: 6px;
                 cursor: pointer;
-                padding-left: 8px;
-                transition: 0.2s;
+                padding-left: 40px;
+                transform: scale(1.03);
             }
         </style>
+
 
 
 
