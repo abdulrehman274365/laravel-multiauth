@@ -33,6 +33,10 @@ Route::controller(SubscriptionController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::controller(SubscriptionController::class)->group(function () {
+        Route::post('/purchase-plans', 'purchasePlan')->name('purchase.plan');
+    });
+
     Route::middleware(['PurchasePlan'])->group(function () {
 
         Route::controller(UserController::class)->group(function () {
@@ -44,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
             Route::controller(WorkspaceController::class)->group(function () {
                 Route::get('/workspaces', 'index')->name('workspaces.index');
+                Route::get('/get-workspace', 'getWorkspace')->name('get.workspaces');
             });
             Route::controller(UserController::class)->group(function () {
                 Route::get('/dashboard', 'index')->name('dashboard');

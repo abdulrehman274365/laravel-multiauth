@@ -28,126 +28,42 @@
         <!-- end row -->
 
         <div class="row">
-            <div class="col-xl-3 col-sm-6">
-                <div class="card pricing-box">
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <div class="mt-3">
-                                <i class="ri-edit-box-line text-primary h1"></i>
-                            </div>
-                            <h5 class="mt-4">Starter</h5>
+            @foreach($plans as $plan)
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card pricing-box">
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <div class="mt-3">
+                                    <i class="ri-edit-box-line text-primary h1"></i>
+                                </div>
+                                <h5 class="mt-4">{{ $plan->title }}</h5>
 
-                            <div class="font-size-14 mt-4 pt-2">
-                                <ul class="list-unstyled plan-features">
-                                    <li>Free Live Support</li>
-                                    <li>Unlimited User</li>
-                                    <li>No Time Tracking</li>
-                                </ul>
+                                <div class="font-size-14 mt-4 pt-2">
+                                    <ul class="list-unstyled plan-features">
+                                        <li>Free Live Support</li>
+                                        <li>Unlimited User</li>
+                                        <li>No Time Tracking</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-5">
+                                    <h1 class="fw-bold mb-1"><sup class="me-1"><small>$</small></sup>{{ $plan->price }}</h1>
+                                    <p class="text-muted">Per month</p>
+                                </div>
+
+                                <div class="mt-5 mb-3">
+                                    <form action="{{ route('purchase.plan') }}" method="post" class="">
+                                        @csrf
+                                        <input type="hidden" name="plan_id" value="{{ $plan->id }}" />
+                                        <button type="submit" class="btn btn-primary w-md">Get started</button>
+                                    </form>
+                                </div>
                             </div>
 
-                            <div class="mt-5">
-                                <h1 class="fw-bold mb-1"><sup class="me-1"><small>$</small></sup>19</h1>
-                                <p class="text-muted">Per month</p>
-                            </div>
-
-                            <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-primary w-md">Get started</a>
-                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card pricing-box">
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <div class="mt-3">
-                                <i class="ri-medal-line text-primary h1"></i>
-                            </div>
-                            <h5 class="mt-4">Professional</h5>
-
-                            <div class="font-size-14 mt-4 pt-2">
-                                <ul class="list-unstyled plan-features">
-                                    <li>Free Live Support</li>
-                                    <li>Unlimited User</li>
-                                    <li>No Time Tracking</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-5">
-                                <h1 class="fw-bold mb-1"><sup class="me-1"><small>$</small></sup>29</h1>
-                                <p class="text-muted">Per month</p>
-                            </div>
-
-                            <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-primary w-md">Get started</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card pricing-box">
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <div class="mt-3">
-                                <i class="ri-stack-line text-primary h1"></i>
-                            </div>
-                            <h5 class="mt-4">Enterprise</h5>
-
-                            <div class="font-size-14 mt-4 pt-2">
-                                <ul class="list-unstyled plan-features">
-                                    <li>Free Live Support</li>
-                                    <li>Unlimited User</li>
-                                    <li>No Time Tracking</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-5">
-                                <h1 class="fw-bold mb-1"><sup class="me-1"><small>$</small></sup>39</h1>
-                                <p class="text-muted">Per month</p>
-                            </div>
-
-                            <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-primary w-md">Get started</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card pricing-box">
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <div class="mt-3">
-                                <i class="ri-vip-crown-line text-primary h1"></i>
-                            </div>
-                            <h5 class="mt-4">Unlimited</h5>
-
-                            <div class="font-size-14 mt-4 pt-2">
-                                <ul class="list-unstyled plan-features">
-                                    <li>Free Live Support</li>
-                                    <li>Unlimited User</li>
-                                    <li>No Time Tracking</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-5">
-                                <h1 class="fw-bold mb-1"><sup class="me-1"><small>$</small></sup>49</h1>
-                                <p class="text-muted">Per month</p>
-                            </div>
-
-                            <div class="mt-5 mb-3">
-                                <a href="#" class="btn btn-primary w-md">Get started</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- end row -->
 

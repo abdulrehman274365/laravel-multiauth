@@ -33,14 +33,37 @@
 
     <!-- App Css -->
     <link href="{{ asset('web/assets/css/app.min.css') }}" id="app-style" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <style>
         hr {
             color: grey;
         }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
     </style>
 </head>
 
+<div class="loading-screen">
+    <div class="loading-content text-center">
+        <i class="fa-solid fa-spinner fa-spin-pulse" style="font-size: 100px;"></i>
+        <p style="font-size: 20px;; margin-top: 20px;">Please wait...</p>
+    </div>
+</div>
 <body data-sidebar="dark">
     <div id="layout-wrapper">
         @include('layouts.include.header')
