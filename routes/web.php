@@ -33,6 +33,7 @@ Route::controller(SubscriptionController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
     Route::controller(SubscriptionController::class)->group(function () {
         Route::post('/purchase-plans', 'purchasePlan')->name('purchase.plan');
     });
@@ -40,8 +41,14 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['PurchasePlan'])->group(function () {
 
         Route::controller(UserController::class)->group(function () {
-            Route::get('/lock', 'LockScreen')->name('user.lock');
+            Route::post('/lock', 'LockScreen')->name('user.lock');
             Route::post('/un-lock', 'unLockScreen')->name('user.unlock');
+        });
+        Route::get('/lock', function () {
+            if (!session('isLocked')) {
+                return redirect()->route('dashboard');
+            }
+            return view('user.v1.lock');
         });
 
         Route::middleware(['isLocked'])->group(function () {
@@ -49,17 +56,27 @@ Route::middleware(['auth'])->group(function () {
             Route::controller(WorkspaceController::class)->group(function () {
                 Route::get('/workspaces', 'index')->name('workspaces.index');
                 Route::get('/get-workspace', 'getWorkspace')->name('get.workspaces');
-            });
-            Route::controller(UserController::class)->group(function () {
-                Route::get('/dashboard', 'index')->name('dashboard');
-            });
-            Route::controller(ItemController::class)->group(function () {
-                Route::get('/items', 'index')->name('items.index');
+                Route::post('/workspaces-selected', 'workspaceSelected')->name('workspaces.selected');
+                Route::post('/create-workspace', 'createWorkspace')->name('workspace.create');
             });
 
+            Route::middleware(['isWorkspace'])->group(function () {
+
+                Route::controller(UserController::class)->group(function () {
+                    Route::get('/dashboard', 'index')->name('dashboard');
+                    Route::get('/profile', 'profileView')->name('user.profile');
+                    Route::post('/upload-profile-image', 'uploadProfileImage')->name('upload.profile.image');
+                    Route::post('/default-profile-image', 'defaultProfileImage')->name('default.profile.image');
+                });
+
+                Route::controller(ItemController::class)->group(function () {
+                    Route::get('/items', 'index')->name('items.index');
+                });
+
+            });
         });
-    });
 
+    });
 });
 
 

@@ -4,7 +4,9 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
-
+@php
+$workspace=session()->get('workspace')
+@endphp
 
 <div class="page-content">
     <div class="container-fluid">
@@ -17,7 +19,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Appzia</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
 
@@ -26,6 +28,7 @@
         </div>
         <!-- end page title -->
 
+        <h1>Wlecome To {{ $workspace->name }}</h1>
     </div>
 </div>
 <!-- End Page-content -->

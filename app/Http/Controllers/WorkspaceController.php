@@ -26,4 +26,39 @@ class WorkspaceController extends Controller
             ]);
         }
     }
+
+    public function workspaceSelected(Request $request)
+    {
+        $workspace = Workspace::find($request->workspace_id);
+        if ($workspace) {
+            session()->put('workspace', $workspace);
+            return response()->json([
+                "success" => true,
+            ]);
+        } else {
+            return response()->json([
+                "success" => false,
+            ]);
+        }
+    }
+
+    public function createWorkspace(Request $request)
+    {
+        Workspace::create([
+            "name" => $request->name,
+            "icon" => $request->icon,
+            "user_id" => auth()->user()->id,
+            "email" => $request->email,
+            "website" => $request->website,
+            "phone" => $request->phone,
+            "address" => $request->country . ", " . $request->city . ", " . $request->address,
+            "style" => [
+                "color" => $request->color,
+                "backgroundColor" => $request->backgroundColor,
+            ],
+        ]);
+        return response()->json([
+            "success"=> true,
+        ]);
+    }
 }

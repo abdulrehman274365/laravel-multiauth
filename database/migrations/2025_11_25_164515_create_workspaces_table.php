@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->string('phone')->nullable();
             $table->longText('address');
             $table->json('style')->nullable();
             $table->timestamps();

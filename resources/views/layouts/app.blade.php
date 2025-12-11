@@ -37,6 +37,9 @@
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    @php
+        $workspace = session()->get('workspace')
+    @endphp
 
     <style>
         hr {
@@ -58,12 +61,13 @@
     </style>
 </head>
 
-<div class="loading-screen">
+<div class="loading-screen d-none">
     <div class="loading-content text-center">
         <i class="fa-solid fa-spinner fa-spin-pulse" style="font-size: 100px;"></i>
         <p style="font-size: 20px;; margin-top: 20px;">Please wait...</p>
     </div>
 </div>
+
 <body data-sidebar="dark">
     <div id="layout-wrapper">
         @include('layouts.include.header')

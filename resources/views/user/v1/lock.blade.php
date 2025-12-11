@@ -68,7 +68,7 @@
                                         <form class="" action="{{ route('user.unlock') }}" method="post">
                                             @csrf
                                             <div class="user-thumb text-center mb-5">
-                                                <img src="assets/images/users/avatar-2.jpg"
+                                                <img  src="{{ asset('web/uploads/profile_image/' . auth()->user()->profile_image) }}"
                                                     class="rounded-circle img-thumbnail avatar-md" alt="thumbnail">
                                                 <h5 class="font-size-15 mt-3 text-dark">{{ auth()->user()->name }}</h5>
                                             </div>

@@ -14,6 +14,7 @@
 
     <!-- App Css -->
     <link href="{{ asset('web/assets/css/app.min.css') }}" id="app-style" rel="stylesheet">
+                
 </head>
 <style>
     .bg-img {
