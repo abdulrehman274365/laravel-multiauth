@@ -36,6 +36,11 @@
     .text-center {
         z-index: 3;
     }
+
+    .user-thumb img {
+        height: 200px !important;
+        width: 200px !important;
+    }
 </style>
 
 <body class="bg-light">
@@ -68,15 +73,15 @@
                                         <form class="" action="{{ route('user.unlock') }}" method="post">
                                             @csrf
                                             <div class="user-thumb text-center mb-5">
-                                                <img  src="{{ asset('web/uploads/profile_image/' . auth()->user()->profile_image) }}"
+                                                <img src="{{ asset('web/uploads/profile_image/' . auth()->user()->profile_image) }}"
                                                     class="rounded-circle img-thumbnail avatar-md" alt="thumbnail">
                                                 <h5 class="font-size-15 mt-3 text-dark">{{ auth()->user()->name }}</h5>
                                             </div>
                                             <div class="mb-3 auth-form-group-custom mb-4">
                                                 <i class="ri-lock-2-line auti-custom-input-icon text-light"></i>
                                                 <label class="form-label text-dark" for="userpassword">Password</label>
-                                                <input type="password" name="password" class="form-control bg-light" id="userpassword"
-                                                    placeholder="Enter password">
+                                                <input type="password" name="password" class="form-control bg-light"
+                                                    id="userpassword" placeholder="Enter password">
                                             </div>
 
                                             <div class="mt-4 text-center">

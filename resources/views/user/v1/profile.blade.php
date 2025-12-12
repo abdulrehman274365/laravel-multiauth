@@ -28,9 +28,8 @@
         </div>
         <!-- end page title -->
 
-
+        {{-- PROFILE IMAGE SECTION --}}
         <div class="row">
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -74,10 +73,21 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
+        {{-- GENERAL INFORMATION SECTION --}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-12 border-bottom mb-3 d-flex align-items-center gap-2">
+                            <i class="ri-information-line fs-5"></i>
+                            <small class="text-muted fw-bold">GENERAL INFORMATION</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- End Page-content -->

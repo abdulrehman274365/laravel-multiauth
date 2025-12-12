@@ -3932,9 +3932,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
   z-index: 999;
 }
 .user-thumb img {
-  height: 88px;
+  height: 200px;
   margin: 0 auto;
-  width: 88px;
+  width: 200px;
 }
 
 .ex-page-content h1 {
