@@ -166,13 +166,9 @@
                             class=" ri-building-line align-middle me-1"></i> Workspaces</a>
                     <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i
                             class="ri-settings-2-line align-middle me-1"></i> Settings</a>
-                    <a class="dropdown-item" href="#"
-                        onclick="event.preventDefault(); document.getElementById('lock-form').submit();">
+                    <a class="dropdown-item" href="{{ route('user.lock') }}">
                         <i class="ri-lock-unlock-line align-middle me-1"></i> Lock screen
                     </a>
-                    <form id="lock-form" action="{{ route('user.lock') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
                     <div class="dropdown-divider"></div>
                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                         @csrf

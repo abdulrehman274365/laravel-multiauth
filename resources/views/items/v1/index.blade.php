@@ -72,7 +72,6 @@
         </div>
         <!--- ITEMS SUMMARY-->
 
-
         <div class="row">
             <div class="col-12">
                 <div class="rounded shadow-sm p-4">
@@ -94,17 +93,23 @@
                             </a>
                         </li>
 
-                        <li class="py-2  menu-item">
-                            <a href="#" class=" text-decoration-none d-flex align-items-center">
+                        <li class="py-2 menu-item">
+                            <a href="javascript:void(0)" class="text-decoration-none d-flex align-items-center"
+                                data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                                 <i class="ri-folder-add-line me-2 fs-5"></i> New Category
                             </a>
                         </li>
 
-                        <li class="py-2  menu-item">
-                            <a href="#" class=" text-decoration-none d-flex align-items-center">
+                        <li class="py-2 menu-item">
+                            <a href="javascript:void(0)" id="showCategoriesModal"
+                                class="text-decoration-none d-flex align-items-center">
                                 <i class="ri-folders-line me-2 fs-5"></i> Categories List
                             </a>
                         </li>
+
+                        <div id="modalContainer"></div>
+
+
 
                     </ul>
                 </div>
@@ -115,6 +120,7 @@
             .menu-item {
                 transition: 0.25s ease;
             }
+
             .menu-item:hover {
                 border-radius: 6px;
                 cursor: pointer;
@@ -128,6 +134,20 @@
 
     </div>
 </div>
-<!-- End Page-content -->
+@include('items.v1.partials.addCategoryForm');
+
+<script>
+    document.getElementById('showCategoriesModal').addEventListener('click', function () {
+        fetch("{{ route('categories.list') }}")
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('modalContainer').innerHTML = html;
+                var modal = new bootstrap.Modal(document.getElementById('categoriesListModal'));
+                modal.show();
+            });
+    });
+
+</script>
+
 
 @stop

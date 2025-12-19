@@ -41,14 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['PurchasePlan'])->group(function () {
 
         Route::controller(UserController::class)->group(function () {
-            Route::post('/lock', 'LockScreen')->name('user.lock');
+            Route::get('/lock', 'LockScreen')->name('user.lock');
             Route::post('/un-lock', 'unLockScreen')->name('user.unlock');
-        });
-        Route::get('/lock', function () {
-            if (!session('isLocked')) {
-                return redirect()->route('dashboard');
-            }
-            return view('user.v1.lock');
         });
 
         Route::middleware(['isLocked'])->group(function () {
@@ -65,13 +59,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::controller(UserController::class)->group(function () {
                     Route::get('/dashboard', 'index')->name('dashboard');
                     Route::get('/profile', 'profileView')->name('user.profile');
+                    Route::get('/recent-activity', 'userActivityLogs')->name('user.recent.activity');
                     Route::post('/upload-profile-image', 'uploadProfileImage')->name('upload.profile.image');
                     Route::post('/default-profile-image', 'defaultProfileImage')->name('default.profile.image');
                 });
 
                 Route::controller(ItemController::class)->group(function () {
                     Route::get('/items', 'index')->name('items.index');
+                    Route::get('/categories-list', 'categoriesList')->name('categories.list');
+
                 });
+
 
             });
         });

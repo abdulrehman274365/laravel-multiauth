@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,18 +20,6 @@ class UserController extends Controller
 
     public function LockScreen()
     {
-        ActivityLogger::store([
-            'model' => 'User',
-            'function' => 'LockScreen',
-            'user_log' => 'Profile is locked',
-            'owner_log' => auth()->user()->name . ' lock the profile',
-            'general_log' => 'User ID ( ' . auth()->user()->id . ' ) lock the profile',
-            'log_icon' => 'ri-information-line',
-            'log_style' => [
-                'color' => 'red',
-                'backgroundColor' => 'red',
-            ],
-        ]);
         session()->put('isLocked', true);
         return view('user.v1.lock');
     }
@@ -44,18 +33,6 @@ class UserController extends Controller
 
         if (Hash::check($request->password, $user->password)) {
             session()->forget('isLocked');
-            ActivityLogger::store([
-                'model' => 'User',
-                'function' => 'unLockScreen',
-                'user_log' => 'Profile is unlocked',
-                'owner_log' => auth()->user()->name . ' unlock the profile',
-                'general_log' => 'User ID ( ' . auth()->user()->id . ' ) unlock the profile',
-                'log_icon' => 'ri-information-line',
-                'log_style' => [
-                    'color' => 'blue',
-                    'backgroundColor' => 'blue',
-                ],
-            ]);
             return redirect()->route('dashboard');
         }
         return back()->withErrors([
@@ -87,7 +64,18 @@ class UserController extends Controller
 
         $user->profile_image = $filename;
         $user->save();
-
+        ActivityLogger::store([
+            'model' => 'User',
+            'function' => 'UploadProfileImage',
+            'user_log' => 'Profile image updated.',
+            'owner_log' => auth()->user()->name . ' updated profile image.',
+            'general_log' => 'User ID ( ' . auth()->user()->id . ' ) updated the profile image.',
+            'log_icon' => 'ri-information-line',
+            'log_style' => [
+                'color' => 'green',
+                'backgroundColor' => 'green',
+            ],
+        ]);
         return back()->with('success', 'Profile image uploaded successfully!');
     }
 
@@ -104,8 +92,25 @@ class UserController extends Controller
 
         $user->profile_image = 'default.svg';
         $user->save();
-
+        ActivityLogger::store([
+            'model' => 'User',
+            'function' => 'defaultProfileImage',
+            'user_log' => 'Profile image removed.',
+            'owner_log' => auth()->user()->name . ' removed profile image.',
+            'general_log' => 'User ID ( ' . auth()->user()->id . ' ) removed the profile image.',
+            'log_icon' => 'ri-information-line',
+            'log_style' => [
+                'color' => 'red',
+                'backgroundColor' => 'red',
+            ],
+        ]);
         return back()->with('success', 'Profile image removed!');
+    }
+
+    public function userActivityLogs()
+    {
+        $logs = ActivityLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('user.v1.logs', compact('logs'));
     }
 
 }

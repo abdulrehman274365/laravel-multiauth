@@ -17,7 +17,7 @@
 </head>
 <style>
     .bg-img {
-        background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');
+        background-image: url('web/uploads/profile_image/{{ auth()->user()->profile_image}}');
         background-size: cover;
         background-position: center;
         position: absolute;
@@ -28,8 +28,8 @@
     .overlay-blur {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
         z-index: 2;
     }
 

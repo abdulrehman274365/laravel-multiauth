@@ -82,6 +82,49 @@
         @include('layouts.include.rightSideBar')
         @include('layouts.include.scripts')
     </div>
+    <!-- Custom context menu -->
+    <div id="customContextMenu"
+        style="position: absolute; display: none; z-index: 9999; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); border-radius: 5px; min-width: 150px;">
+        <ul style="list-style: none; margin: 0; padding: 5px 0;">
+            <li class="context-item" style="padding: 8px 15px; cursor: pointer;">Action 1</li>
+            <li class="context-item" style="padding: 8px 15px; cursor: pointer;">Action 2</li>
+            <li class="context-item" style="padding: 8px 15px; cursor: pointer;">Action 3</li>
+        </ul>
+    </div>
+
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menu = document.getElementById('customContextMenu');
+
+        // Show menu on right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault(); // Prevent default browser menu
+
+            // Set menu position
+            menu.style.top = e.pageY + 'px';
+            menu.style.left = e.pageX + 'px';
+            menu.style.display = 'block';
+        });
+
+        // Hide menu on left click anywhere
+        document.addEventListener('click', function (e) {
+            menu.style.display = 'none';
+        });
+
+        // Handle click on menu items
+        document.querySelectorAll('.context-item').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                alert('You clicked: ' + this.textContent);
+                menu.style.display = 'none';
+            });
+        });
+
+        // Optional: hide menu if scrolling
+        window.addEventListener('scroll', function () {
+            menu.style.display = 'none';
+        });
+    });
+</script>
 
 </html>
