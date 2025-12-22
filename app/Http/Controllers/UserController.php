@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\ActivityLog;
+use App\Models\DashboardSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,14 @@ class UserController extends Controller
 {
     public function index()
     {
+        $settings = DashboardSetting::where('user_id', auth()->user()->id)->first();
+        if (!$settings) {
+            DashboardSetting::create([
+                'user_id' => auth()->user()->id,
+            ]);
+        }
         return view('user.v1.dashboard');
+
     }
 
     public function LockScreen()
@@ -66,17 +74,24 @@ class UserController extends Controller
         $user->save();
         ActivityLogger::store([
             'model' => 'User',
+            'log_title' => 'Profile Image Uploaded',
             'function' => 'UploadProfileImage',
             'user_log' => 'Profile image updated.',
             'owner_log' => auth()->user()->name . ' updated profile image.',
             'general_log' => 'User ID ( ' . auth()->user()->id . ' ) updated the profile image.',
-            'log_icon' => 'ri-information-line',
+            'log_icon' => 'ri-camera-line',
             'log_style' => [
-                'color' => 'green',
-                'backgroundColor' => 'green',
+                'color' => '#0d6efd',
+                'backgroundColor' => '#e7f1ff',
             ],
         ]);
-        return back()->with('success', 'Profile image uploaded successfully!');
+        return back()->with([
+            'toast' => [
+                'type' => 'success',
+                'title' => 'Profile Updated',
+                'message' => 'Profile image uploaded successfully!',
+            ]
+        ]);
     }
 
     public function defaultProfileImage()
@@ -94,23 +109,96 @@ class UserController extends Controller
         $user->save();
         ActivityLogger::store([
             'model' => 'User',
+            'log_title' => 'Profile Image Removed',
             'function' => 'defaultProfileImage',
             'user_log' => 'Profile image removed.',
             'owner_log' => auth()->user()->name . ' removed profile image.',
             'general_log' => 'User ID ( ' . auth()->user()->id . ' ) removed the profile image.',
-            'log_icon' => 'ri-information-line',
+            'log_icon' => 'ri-camera-off-line',
             'log_style' => [
-                'color' => 'red',
-                'backgroundColor' => 'red',
+                'color' => '#856404',
+                'backgroundColor' => '#fff3cd',
             ],
         ]);
-        return back()->with('success', 'Profile image removed!');
+        return back()->with([
+            'toast' => [
+                'type' => 'info',
+                'title' => 'Image Removed',
+                'message' => 'Profile image removed!',
+            ]
+        ]);
     }
 
     public function userActivityLogs()
     {
         $logs = ActivityLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         return view('user.v1.logs', compact('logs'));
+    }
+
+    public function getLatestLogs()
+    {
+        $logs = ActivityLog::orderBy('created_at', 'desc')
+            ->where('user_id', auth()->user()->id)
+            ->select('log_title', 'user_log', 'log_icon', 'log_style', 'created_at')
+            ->take(4)
+            ->get();
+        if (count($logs) > 0) {
+            return response()->json([
+                'success' => true,
+                'logs' => $logs,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'logs' => $logs,
+            ]);
+        }
+    }
+    public function userNightModeSetting(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($user->dashboardSettings) {
+            $nightMode = filter_var($request->night_mode, FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
+
+            $user->dashboardSettings->update([
+                'night_mode' => $nightMode
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'night_mode' => $user->dashboardSettings->night_mode
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Dashboard settings not found'
+        ], 404);
+
+    }
+
+    public function userLeftSideBarSetting(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($user->dashboardSettings) {
+            $left_side_bar_collpsed = filter_var($request->left_side_bar_collpsed, FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
+
+            $user->dashboardSettings->update([
+                'left_side_bar_collpsed' => $left_side_bar_collpsed
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'left_side_bar_collpsed' => $user->dashboardSettings->left_side_bar_collpsed
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Dashboard settings not found'
+        ], 404);
     }
 
 }

@@ -175,55 +175,6 @@ File: Main Js File
         });
     }
 
-    function initSettings() {
-        if (window.sessionStorage) {
-            var alreadyVisited = sessionStorage.getItem("is_visited");
-            if (!alreadyVisited) {
-                sessionStorage.setItem("is_visited", "light-mode-switch");
-            } else {
-                $(".right-bar input:checkbox").prop('checked', false);
-                $("#" + alreadyVisited).prop('checked', true);
-                updateThemeSetting(alreadyVisited);
-            }
-        }
-        $("#light-mode-switch, #dark-mode-switch, #rtl-mode-switch").on("change", function (e) {
-            updateThemeSetting(e.target.id);
-        });
-    }
-    var sidebarlight = document.body.getAttribute("data-topbar");
-    function updateThemeSetting(id) {
-        if ($("#light-mode-switch").prop("checked") == true && id === "light-mode-switch") {
-            $("#dark-mode-switch").prop("checked", false);
-            document.body.setAttribute('data-bs-theme', 'light');
-            sessionStorage.setItem("is_visited", "light-mode-switch");
-        } else if ($("#dark-mode-switch").prop("checked") == true && id === "dark-mode-switch") {
-            if ($("#rtl-mode-switch").prop("checked") == true) {
-                $("html").attr("dir", 'rtl');
-            } else {
-                $("html").removeAttr("dir");
-            }
-            $("#light-mode-switch").prop("checked", false);
-
-            if (sidebarlight == "dark") {
-                document.body.setAttribute('data-sidebar', 'light');
-            }
-            document.body.setAttribute('data-bs-theme', 'dark');
-            sessionStorage.setItem("is_visited", "dark-mode-switch");
-        } else if ($("#rtl-mode-switch").prop("checked") == true && id === "rtl-mode-switch") {
-            $("html").attr("dir", 'rtl');
-            $("#light-mode-switch").prop("checked", false);
-            $("#dark-mode-switch").prop("checked", false);
-            $("#bootstrap-style").attr('href', 'assets/css/bootstrap-rtl.min.css');
-            $("#app-style").attr('href', 'assets/css/app-rtl.min.css');
-            $("html").attr("dir", 'rtl');
-            sessionStorage.setItem("is_visited", "rtl-mode-switch");
-        } else if ($("#rtl-mode-switch").prop("checked") == false && id === "rtl-mode-switch") {
-            $("html").removeAttr("dir");
-            $("#bootstrap-style").attr('href', 'assets/css/bootstrap.min.css');
-            $("#app-style").attr('href', 'assets/css/app.min.css');
-        }
-
-    }
     function init() {
         initMetisMenu();
         initLeftMenuCollapse();

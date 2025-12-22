@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-        <!-- end page title -->
 
         {{-- PROFILE IMAGE SECTION --}}
         <div class="row">
@@ -88,6 +87,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <!-- End Page-content -->

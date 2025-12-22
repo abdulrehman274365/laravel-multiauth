@@ -12,6 +12,7 @@ class ActivityLogger
         $workspace = session()->get('workspace');
         return ActivityLog::create([
             'user_id' => Auth::id(),
+            'log_title' => $data['log_title'],
             'model' => $data['model'],
             'function' => $data['function'],
             'workspace_id' => $workspace->id ?? null,

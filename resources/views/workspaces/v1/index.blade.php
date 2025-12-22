@@ -28,6 +28,7 @@
 
 
     @php
+        $workspace = session()->get('workspace');
         $icons = [
 
             // ========== USER / PROFILE ==========
@@ -316,22 +317,28 @@
             </div>
 
             <div class="d-flex justify-content-center gap-2 mt-3 button-div d-none">
-                <a href="{{ route('dashboard') }}"
-                    class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
-                    <i class="ri-dashboard-line"></i>
-                    Dashboard
-                </a>
-                <button type="button" class="btn btn-outline-secondary d-inline-flex align-items-center gap-2"
-                    data-bs-toggle="modal" data-bs-target=".add-workspace-modal">
-                    <i class="ri-add-circle-line"></i> Add Workspace</button>
-                <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                    @csrf
-                    <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();"
-                        class="btn btn-outline-danger d-inline-flex align-items-center gap-2">
-                        <i class="ri-logout-circle-line"></i>
-                        Logout
-                    </a>
-                </form>
+                @if(Auth::check())
+                    @if($workspace)
+                        <a href="{{ route('dashboard') }}"
+                            class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
+                            <i class="ri-dashboard-line"></i>
+                            Dashboard
+                        </a>
+                    @endif
+                    @if(auth()->user()->user_type == 'owner')
+                        <button type="button" class="btn btn-outline-secondary d-inline-flex align-items-center gap-2"
+                            data-bs-toggle="modal" data-bs-target=".add-workspace-modal">
+                            <i class="ri-add-circle-line"></i> Add Workspace</button>
+                    @endif
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();"
+                            class="btn btn-outline-danger d-inline-flex align-items-center gap-2">
+                            <i class="ri-logout-circle-line"></i>
+                            Logout
+                        </a>
+                    </form>
+                @endif
             </div>
 
         </div>

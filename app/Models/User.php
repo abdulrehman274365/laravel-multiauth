@@ -23,6 +23,12 @@ class User extends Authenticatable
         'password',
         'user_type',
         'profile_image',
+        'gender',
+        'status',
+        'employe_number',
+        'phone',
+        'address',
+        'id_card',
     ];
 
     /**
@@ -47,6 +53,11 @@ class User extends Authenticatable
     public function activityLogs()
     {
         return $this->hasMany(ActivityLog::class, 'user_id', 'id');
+    }
+
+    public function dashboardSettings()
+    {
+        return $this->hasOne(DashboardSetting::class, 'user_id', 'id');
     }
 
 }

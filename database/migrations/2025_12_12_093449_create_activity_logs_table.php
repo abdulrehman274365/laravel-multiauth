@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->bigInteger('workspace_id')->nullable();
             $table->string('model');
             $table->string('function');
+            $table->longText('log_title');
             $table->string('user_log');
             $table->string('owner_log');
             $table->string('general_log');

@@ -17,8 +17,12 @@
 </head>
 <style>
     .bg-img {
-        background-image: url('web/uploads/profile_image/{{ auth()->user()->profile_image}}');
-        background-size: cover;
+        @if(auth()->user()->profile_image == 'default.svg')
+            background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');
+        @else 
+            background-image: url('web/uploads/profile_image/{{ auth()->user()->profile_image}}');
+        @endif
+         background-size: cover;
         background-position: center;
         position: absolute;
         inset: 0;

@@ -58,10 +58,13 @@ Route::middleware(['auth'])->group(function () {
 
                 Route::controller(UserController::class)->group(function () {
                     Route::get('/dashboard', 'index')->name('dashboard');
+                    Route::get('/get-latest-logs', 'getLatestLogs')->name('get.latest.logs');
                     Route::get('/profile', 'profileView')->name('user.profile');
                     Route::get('/recent-activity', 'userActivityLogs')->name('user.recent.activity');
                     Route::post('/upload-profile-image', 'uploadProfileImage')->name('upload.profile.image');
                     Route::post('/default-profile-image', 'defaultProfileImage')->name('default.profile.image');
+                    Route::get('/user-night-mode-setting', 'userNightModeSetting')->name('user.night.mode.setting');
+                    Route::get('/user-left-side-bar-setting', 'userLeftSideBarSetting')->name('user.left.side.bar.setting');
                 });
 
                 Route::controller(ItemController::class)->group(function () {

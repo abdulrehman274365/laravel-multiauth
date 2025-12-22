@@ -11,7 +11,8 @@
 
 <!-- jquery.vectormap map -->
 <script src="{{ asset('web/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('web/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}"></script>
+<script
+    src="{{ asset('web/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}"></script>
 
 <!-- Required datatable js -->
 <script src="{{ asset('web/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -22,6 +23,11 @@
 <script src="{{ asset('web/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('web/assets/js/pages/index.init.js') }}"></script>
+
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 <!-- App js -->
 <script src="{{ asset('web/assets/js/app.js') }}"></script>
