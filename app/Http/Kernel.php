@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
+        'isAllowedFor' => \App\Http\Middleware\IsAllowedFor::class,
         'isWorkspace' => \App\Http\Middleware\WorkspacesMiddleware::class,
         'PurchasePlan' => \App\Http\Middleware\PurchasePlan::class,
         'isLocked' => \App\Http\Middleware\isLocked::class,

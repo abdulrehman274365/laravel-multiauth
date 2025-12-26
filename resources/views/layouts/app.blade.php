@@ -5,6 +5,7 @@
 
     <meta charset="utf-8" />
     <title>Dashboard | Appzia - Admin & Dashboard Template</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -114,7 +115,7 @@
     $default_theme = 'light';
     $left_side_bar_collpsed = '';
     if (Auth::check()) {
-        if (auth()->user()->dashboardSettings->night_mode == true) {
+        if (auth()->user()->dashboardSettings->night_mode == 1) {
             $default_theme = 'dark';
         }
         if (auth()->user()->dashboardSettings->left_side_bar_collpsed == true) {
@@ -123,7 +124,7 @@
     }
 @endphp
 
-<body data-sidebar="dark" cz-shortcut-listen="true" data-bs-theme="{{$default_theme}} "
+<body data-sidebar="dark" cz-shortcut-listen="true" data-bs-theme="{{$default_theme}}"
     class="{{ $left_side_bar_collpsed }}">
     <div id="layout-wrapper">
         @include('layouts.include.header')

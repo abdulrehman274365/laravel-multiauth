@@ -19,10 +19,8 @@
     .bg-img {
         @if(auth()->user()->profile_image == 'default.svg')
             background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');
-        @else 
-            background-image: url('web/uploads/profile_image/{{ auth()->user()->profile_image}}');
-        @endif
-         background-size: cover;
+        @else background-image: url('web/uploads/profile_image/{{ auth()->user()->profile_image}}');
+        @endif background-size: cover;
         background-position: center;
         position: absolute;
         inset: 0;
@@ -41,9 +39,15 @@
         z-index: 3;
     }
 
+  
+
     .user-thumb img {
         height: 200px !important;
         width: 200px !important;
+        object-fit: cover;
+        /* keeps image aspect ratio and crops if needed */
+        border-radius: 50%;
+        /* ensures circle shape */
     }
 </style>
 

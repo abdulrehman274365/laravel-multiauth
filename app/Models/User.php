@@ -60,4 +60,18 @@ class User extends Authenticatable
         return $this->hasOne(DashboardSetting::class, 'user_id', 'id');
     }
 
+    public function workspaces()
+    {
+        return $this->belongsToMany(Workspace::class, 'users_roles')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function role($workspaceId)
+    {
+        $relation = $this->workspaces()->where('workspace_id', $workspaceId)->first();
+        return $relation ? $relation->pivot->role : null;
+    }
+
+
 }

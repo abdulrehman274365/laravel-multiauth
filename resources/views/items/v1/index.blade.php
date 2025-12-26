@@ -4,7 +4,18 @@
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+<style>
+    .menu-item {
+        transition: 0.25s ease;
+    }
 
+    .menu-item:hover {
+        border-radius: 6px;
+        cursor: pointer;
+        padding-left: 40px;
+        transform: scale(1.03);
+    }
+</style>
 
 <div class="page-content">
     <div class="container-fluid">
@@ -116,38 +127,9 @@
             </div>
         </div>
 
-        <style>
-            .menu-item {
-                transition: 0.25s ease;
-            }
-
-            .menu-item:hover {
-                border-radius: 6px;
-                cursor: pointer;
-                padding-left: 40px;
-                transform: scale(1.03);
-            }
-        </style>
-
-
-
-
     </div>
 </div>
-@include('items.v1.partials.addCategoryForm');
 
-<script>
-    document.getElementById('showCategoriesModal').addEventListener('click', function () {
-        fetch("{{ route('categories.list') }}")
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('modalContainer').innerHTML = html;
-                var modal = new bootstrap.Modal(document.getElementById('categoriesListModal'));
-                modal.show();
-            });
-    });
-
-</script>
 
 
 @stop

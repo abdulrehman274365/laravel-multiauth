@@ -10,14 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Stripe\Stripe;
-use Stripe\Account;
-use Stripe\AccountLink;
-use Stripe\BankAccount;
-use Stripe\Payout;
-use App\Models\Website;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMail;
+use App\Services\ActivityLogger;
+
 
 
 class RegisteredUserController extends Controller
@@ -64,6 +58,20 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        ActivityLogger::store([
+            'model' => 'User',
+            'log_title' => 'Register Successful',
+            'function' => 'RegisterUser',
+            'user_log' => 'Welcome! ' . auth()->user()->name,
+            'owner_log' => auth()->user()->name . ' registered recently.',
+            'general_log' => 'User ID ( ' . auth()->user()->id . ' ) registered recently.',
+            'log_icon' => 'ri-user-add-line',
+            'log_style' => [
+                'color' => '#198754',
+                'backgroundColor' => '#d1e7dd',
+            ],
+        ]);
+
         return redirect(RouteServiceProvider::PLANS);
 
     }

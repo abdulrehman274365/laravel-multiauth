@@ -60,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
                     Route::get('/dashboard', 'index')->name('dashboard');
                     Route::get('/get-latest-logs', 'getLatestLogs')->name('get.latest.logs');
                     Route::get('/profile', 'profileView')->name('user.profile');
+                    Route::get('/settings', 'settingsView')->name('user.settings');
+                    Route::post('/user-update-profile', 'userUpdateProfile')->name('user.update.profile');
+                    Route::post('/user-change-password', 'userChangePassword')->name('user.change.password');
                     Route::get('/recent-activity', 'userActivityLogs')->name('user.recent.activity');
                     Route::post('/upload-profile-image', 'uploadProfileImage')->name('upload.profile.image');
                     Route::post('/default-profile-image', 'defaultProfileImage')->name('default.profile.image');
@@ -67,10 +70,11 @@ Route::middleware(['auth'])->group(function () {
                     Route::get('/user-left-side-bar-setting', 'userLeftSideBarSetting')->name('user.left.side.bar.setting');
                 });
 
-                Route::controller(ItemController::class)->group(function () {
-                    Route::get('/items', 'index')->name('items.index');
-                    Route::get('/categories-list', 'categoriesList')->name('categories.list');
-
+                Route::middleware(['isAllowedFor:owner,accountant'])->group(function () {
+                    Route::controller(ItemController::class)->group(function () {
+                        Route::get('/items', 'index')->name('items.index');
+                        Route::get('/categories-list', 'categoriesList')->name('categories.list');
+                    });
                 });
 
 

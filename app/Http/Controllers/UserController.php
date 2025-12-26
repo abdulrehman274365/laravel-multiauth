@@ -28,6 +28,7 @@ class UserController extends Controller
 
     public function LockScreen()
     {
+        session()->put('last_route', url()->previous());
         session()->put('isLocked', true);
         return view('user.v1.lock');
     }
@@ -41,7 +42,11 @@ class UserController extends Controller
 
         if (Hash::check($request->password, $user->password)) {
             session()->forget('isLocked');
-            return redirect()->route('dashboard');
+            $lastUrl = session()->pull(
+                'last_route',
+                route('dashboard')
+            );
+            return redirect()->to($lastUrl);
         }
         return back()->withErrors([
             'password' => 'Incorrect password.'
@@ -51,6 +56,43 @@ class UserController extends Controller
     public function profileView()
     {
         return view('user.v1.profile');
+    }
+
+    public function userUpdateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $user->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'id_card' => $request->id_card,
+            'address' => $request->address,
+        ]);
+
+        ActivityLogger::store([
+            'model' => 'User',
+            'log_title' => 'Profile Updated',
+            'function' => 'userProfileUpdate',
+            'user_log' => 'You, updated your profile.',
+            'owner_log' => auth()->user()->name . ' updated profile general information.',
+            'general_log' => 'User ID (' . auth()->user()->id . ') updated the general information.',
+            'log_icon' => 'ri-user-settings-line',
+            'log_style' => [
+                'color' => '#0d6efd',
+                'backgroundColor' => '#e7f1ff',
+            ],
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'toast' => [
+                'type' => 'success',
+                'title' => 'Profile Updated',
+                'message' => 'Your profile information has been updated successfully.'
+            ]
+        ]);
     }
 
     public function uploadProfileImage(Request $request)
@@ -199,6 +241,51 @@ class UserController extends Controller
             'status' => 'error',
             'message' => 'Dashboard settings not found'
         ], 404);
+    }
+
+    public function userChangePassword(Request $request)
+    {
+        $old_password = $request->old_password;
+
+        if (!Hash::check($old_password, auth()->user()->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Old password is incorrect',
+            ]);
+        }
+
+        $user = auth()->user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        ActivityLogger::store([
+            'model' => 'User',
+            'log_title' => 'Password Changed',
+            'function' => 'userChangePassword',
+            'user_log' => 'You, changed your password.',
+            'owner_log' => auth()->user()->name . ' change password.',
+            'general_log' => 'User ID (' . auth()->user()->id . ') change password.',
+            'log_icon' => 'ri-key-2-line',
+            'log_style' => [
+                'color' => '#fd7e14',
+                'backgroundColor' => '#fdedd5ff'
+            ],
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'toast' => [
+                'type' => 'info',
+                'title' => 'Password Changed',
+                'message' => 'Your password changed successfully.'
+            ]
+        ]);
+
+    }
+
+    public function settingsView()
+    {
+        return view('Settings.v1.index');
     }
 
 }

@@ -121,7 +121,7 @@
                             class="ri-user-line align-middle me-1"></i> Profile</a>
                     <a class="dropdown-item" href="{{ route('workspaces.index') }}"><i
                             class=" ri-building-line align-middle me-1"></i> Workspaces</a>
-                    <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i
+                    <a class="dropdown-item d-block" href="{{ route('user.settings') }}"><span class="badge bg-success float-end mt-1">11</span><i
                             class="ri-settings-2-line align-middle me-1"></i> Settings</a>
                     <a class="dropdown-item" href="{{ route('user.lock') }}">
                         <i class="ri-lock-unlock-line align-middle me-1"></i> Lock screen

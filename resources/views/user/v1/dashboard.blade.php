@@ -34,13 +34,13 @@
             </div>
         </div>
         <!-- end page title -->
-         
+
         <div class="col-md-12">
             <div class="card border-0 shadow-lg overflow-hidden rounded-3 profile-card">
 
                 {{-- 1. Gradient Banner Background --}}
                 <div class="card-header border-0 p-0"
-                    style="height: 50px; background: linear-gradient(135deg, #04A2B3 0%, #2A323C 100%);">
+                    style="height: 100px; background: linear-gradient(135deg, #04A2B3 0%, #2A323C 100%);">
                 </div>
 
                 <div class="card-body p-4 position-relative">
@@ -63,8 +63,10 @@
                     <div class="d-flex justify-content-between align-items-start flex-wrap">
                         <div>
                             <h3 class="fw-bold text-dark mb-0">{{ auth()->user()->name }}
-                                {{ auth()->user()->last_name }}</h3>
-                            <p class="text-muted text-uppercase small fw-bold mb-3 ls-1">{{ auth()->user()->user_type }}
+                                {{ auth()->user()->last_name }}
+                            </h3>
+                            <p class="text-muted text-uppercase small fw-bold mb-3 ls-1">
+                                {{ auth()->user()->role($workspace->id) ?? auth()->user()->user_type }}
                             </p>
 
                             <span class="badge rounded-pill px-3 py-2 

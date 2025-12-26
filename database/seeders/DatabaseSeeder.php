@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\Admin::create([
-            'name' => 'Admin',
-            'Email' => 'admin@admin.com',
-            'password' => bcrypt('password')
-        ]);
+        // \App\Models\Admin::create([
+        //     'name' => 'Admin',
+        //     'Email' => 'admin@admin.com',
+        //     'password' => bcrypt('password')
+        // ]);
 
-        \App\Models\User::create([
-            'name' => 'User',
-            'Email' => 'user@user.com',
-            'password' => bcrypt('password')
-        ]);
+        // \App\Models\User::create([
+        //     'name' => 'User',
+        //     'Email' => 'user@user.com',
+        //     'password' => bcrypt('password')
+        // ]);
 
         \App\Models\Plans::create([
             'title' => 'Standard',
@@ -41,16 +41,16 @@ class DatabaseSeeder extends Seeder
             'instructions' => 'qwerty qwerty qwerty qwerty',
         ]);
 
-        \App\Models\Workspace::create([
-            'name' => 'TechSolutions',
-            'icon' => 'fa-solid fa-location-dot',
-            'user_id' => 1,
-            'address' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the.',
-            'style' => [
-                'color' => '#a200ffff',
-                'backgroundColor' => '#130066ff'
-            ],
-        ]);
+        // \App\Models\Workspace::create([
+        //     'name' => 'TechSolutions',
+        //     'icon' => 'fa-solid fa-location-dot',
+        //     'user_id' => 1,
+        //     'address' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the.',
+        //     'style' => [
+        //         'color' => '#a200ffff',
+        //         'backgroundColor' => '#130066ff'
+        //     ],
+        // ]);
 
 
     }
