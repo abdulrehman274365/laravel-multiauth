@@ -72,6 +72,6 @@ class User extends Authenticatable
         $relation = $this->workspaces()->where('workspace_id', $workspaceId)->first();
         return $relation ? $relation->pivot->role : null;
     }
-
+   
 
 }

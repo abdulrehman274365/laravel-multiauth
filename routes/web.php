@@ -71,6 +71,11 @@ Route::middleware(['auth'])->group(function () {
                 });
 
                 Route::middleware(['isAllowedFor:owner,accountant'])->group(function () {
+                    Route::controller(UserController::class)->group(function () {
+                        Route::post('/settings/users', [UserController::class, 'workspaceUserSettingView'])
+                            ->name('user.workspace.settings');
+
+                    });
                     Route::controller(ItemController::class)->group(function () {
                         Route::get('/items', 'index')->name('items.index');
                         Route::get('/categories-list', 'categoriesList')->name('categories.list');

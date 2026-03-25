@@ -29,7 +29,6 @@ class IsAllowedFor
                         'message' => 'You do not have permission to access this page.',
                     ]
                 ]);
-
             }
         } else {
             return redirect()->route('dashboard')->with([

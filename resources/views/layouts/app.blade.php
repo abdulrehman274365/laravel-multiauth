@@ -100,6 +100,10 @@
             width: 20px;
             text-align: center;
         }
+
+        .header-profile-user {
+            object-fit: cover !important;
+        }
     </style>
 </head>
 
@@ -148,7 +152,7 @@
             <a href="{{ route('workspaces.index') }}">
                 <li class="context-item"><i class="fa-solid fa-building"></i> Workspaces</li>
             </a>
-            <a href="#">
+            <a href="{{ route('user.settings') }}">
                 <li class="context-item"><i class="fa-solid fa-gear"></i> Settings</li>
             </a>
             <a href="{{ route('user.lock') }}">

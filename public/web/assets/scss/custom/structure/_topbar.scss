@@ -126,6 +126,7 @@
     width: 36px;
     background-color: var(--#{$prefix}secondary-bg);
     padding: 3px;
+    object-fit: cover !important;
 }
 
 .user-dropdown {

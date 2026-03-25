@@ -74,6 +74,8 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         session()->forget('workspace');
+        session()->forget('last_route');
+        session()->forget('isLocked');
         $request->session()->regenerateToken();
         return redirect('/');
     }

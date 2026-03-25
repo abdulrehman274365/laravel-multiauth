@@ -14,6 +14,9 @@
 
     <!-- App Css -->
     <link href="{{ asset('web/assets/css/app.min.css') }}" id="app-style" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <style>
     .bg-img {
@@ -39,7 +42,7 @@
         z-index: 3;
     }
 
-  
+
 
     .user-thumb img {
         height: 200px !important;
@@ -85,11 +88,21 @@
                                                     class="rounded-circle img-thumbnail avatar-md" alt="thumbnail">
                                                 <h5 class="font-size-15 mt-3 text-dark">{{ auth()->user()->name }}</h5>
                                             </div>
+
                                             <div class="mb-3 auth-form-group-custom mb-4">
-                                                <i class="ri-lock-2-line auti-custom-input-icon text-light"></i>
+                                                <i class="fa-solid fa-lock"></i>
+
                                                 <label class="form-label text-dark" for="userpassword">Password</label>
-                                                <input type="password" name="password" class="form-control bg-light"
-                                                    id="userpassword" placeholder="Enter password">
+                                                @error('password')
+                                                    <small class="text-danger fw-bold">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+
+                                                <input type="password" name="password" id="userpassword"
+                                                    placeholder="Enter password"
+                                                    class="form-control bg-light @error('password') is-invalid @enderror">
+
                                             </div>
 
                                             <div class="mt-4 text-center">

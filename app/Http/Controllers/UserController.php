@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\ActivityLog;
+use App\Models\Workspace;
 use App\Models\DashboardSetting;
+use App\Models\UsersRoles;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,10 +30,15 @@ class UserController extends Controller
 
     public function LockScreen()
     {
-        session()->put('last_route', url()->previous());
+        if (!session()->has('last_route')) {
+            session()->put('last_route', url()->previous());
+        }
+
         session()->put('isLocked', true);
+
         return view('user.v1.lock');
     }
+
 
     public function unLockScreen(Request $request)
     {
@@ -39,19 +46,16 @@ class UserController extends Controller
         $request->validate([
             'password' => 'required'
         ]);
-
-        if (Hash::check($request->password, $user->password)) {
-            session()->forget('isLocked');
-            $lastUrl = session()->pull(
-                'last_route',
-                route('dashboard')
-            );
-            return redirect()->to($lastUrl);
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'Incorrect password.'
+            ]);
         }
-        return back()->withErrors([
-            'password' => 'Incorrect password.'
-        ]);
+        session()->forget('isLocked');
+        $lastUrl = session()->pull('last_route', route('dashboard'));
+        return redirect()->to($lastUrl);
     }
+
 
     public function profileView()
     {
@@ -286,6 +290,32 @@ class UserController extends Controller
     public function settingsView()
     {
         return view('Settings.v1.index');
+    }
+
+    public function workspaceUserSettingView(Request $request)
+    {
+        $workspace_id = $request->workspace_id;
+        //dd($workspace_id);
+        if ($workspace_id === 'all') {
+            $users = User::with('workspaces')->get();
+        } else {
+            $workspace = Workspace::with('users')->findOrFail($workspace_id);
+
+            // return redirect()->route('dashboard')->with([
+            //     'toast' => [
+            //         'type' => 'error',
+            //         'title' => 'Access Denied',
+            //         'message' => 'You do not have permission to access this workspace.',
+            //     ]
+            // ]);
+
+            $users = $workspace->users;
+        }
+        // return response()->json([
+        //     'success' => true,
+        //     'users' => $users,
+        // ]); 
+        return view('Settings.v1.users.index', compact('users'));
     }
 
 }
