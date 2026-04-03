@@ -97,7 +97,6 @@ require __DIR__ . '/auth.php';
 
 
 Route::middleware(['auth:admin'])->group(function () {
-
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin/dashboard', 'dashboardView')->name('admin.dashboard');
     });
@@ -106,6 +105,3 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
 require __DIR__ . '/adminauth.php';
-
-
-

@@ -300,7 +300,6 @@ class UserController extends Controller
             $users = User::with('workspaces')->get();
         } else {
             $workspace = Workspace::with('users')->findOrFail($workspace_id);
-
             // return redirect()->route('dashboard')->with([
             //     'toast' => [
             //         'type' => 'error',
@@ -308,7 +307,6 @@ class UserController extends Controller
             //         'message' => 'You do not have permission to access this workspace.',
             //     ]
             // ]);
-
             $users = $workspace->users;
         }
         // return response()->json([
