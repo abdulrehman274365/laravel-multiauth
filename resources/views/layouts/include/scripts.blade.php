@@ -29,5 +29,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.23.0/sweetalert2.all.js"
+    integrity="sha512-kEG1e68iTZ6mp4hawzUG6LqyzSdDY+wXV2OJ2OjU5tfg6daEbVUYKMxYutmnUN7iwKO2BPICXNE7yh2qtS5YHw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- App js -->
 <script src="{{ asset('web/assets/js/app.js') }}"></script>

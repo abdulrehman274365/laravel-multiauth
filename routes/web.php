@@ -7,6 +7,9 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WorkspaceController;
+use App\Http\Controllers\BoardAreaController;
+use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\SprintController;
 
 
 
@@ -80,8 +83,36 @@ Route::middleware(['auth'])->group(function () {
                         Route::get('/items', 'index')->name('items.index');
                         Route::get('/categories-list', 'categoriesList')->name('categories.list');
                     });
-                });
+                    Route::prefix('workspace-board')
+                        ->controller(BoardAreaController::class)
+                        ->group(function () {
 
+                            Route::get('/', 'index')->name('board.index');
+                            Route::get('/create', 'create')->name('board.create');
+                            Route::post('/store', 'store')->name('board.store');
+                            Route::post('/store', 'store')->name('board.store');
+                            Route::delete('/delete/{id}', 'destroy')->name('board.delete');
+
+                        });
+                    Route::prefix('workspace-board/tickets')
+                        ->controller(TicketsController::class)
+                        ->group(function () {
+
+                            Route::post('/store', 'store')->name('tickets.store');
+                            Route::post('/reorder', 'reorder')->name('tickets.reorder');
+
+                        });
+
+                    Route::prefix('workspace-board/sprint')
+                        ->controller(SprintController::class)
+                        ->group(function () {
+
+                            Route::get('/', 'index')->name('sprint.index');
+                            Route::get('/create', 'create')->name('sprint.create');
+                            Route::post('/store', 'store')->name('sprint.store');
+
+                        });
+                });
 
             });
         });

@@ -48,6 +48,7 @@
     @endphp
 
     <style>
+  
         hr {
             color: grey;
         }
